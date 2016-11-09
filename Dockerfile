@@ -1,6 +1,17 @@
 FROM php:7.0-fpm
 MAINTAINER gfisaris@gmail.com
 
+## Prepare Folders for PHP, PHP-FPM and FPM Pool Logs
+#RUN mkdir -p /var/log/php && \
+#    mkdir -p /var/log/php-fpm && \
+#    mkdir -p /var/log/php-fpm.d/www
+
+## Forward all Logs to Docker Log Collector
+#RUN ln -sf /dev/stderr /var/log/php/errors.logs && \
+#    ln -sf /dev/stderr /var/log/php-fpm/errors.logs && \
+#    ln -sf /dev/stderr /var/log/php-fpm.d/www/errors.logs && \
+#    ln -sf /dev/stdout /var/log/php-fpm.d/www/access.logs 
+
 COPY etc/php.ini /usr/local/etc/php/php.ini
 COPY etc/php-fpm.conf /usr/local/etc/php/php-fpm.conf
 COPY etc/php-fpm.d/www.conf /usr/local/etc/php-fpm.d/www.conf
